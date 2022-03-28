@@ -1,0 +1,82 @@
+@import '../../styles/config/variables.scss';
+
+
+.chatroom {
+    max-width: 575px;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    @include media(min-width, 575px) {
+        margin: 0 auto;
+    }
+    .header {
+        //border: 1px solid;
+        padding: $m;
+        text-align: center;
+        .title { font-size: $size-l; font-weight: $medium; text-transform: capitalize; }
+    }
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        justify-content: end;
+        row-gap: $s;
+        overflow-x: auto;
+        .msg {
+            display: grid;
+            align-self: flex-start;
+            & p {
+                background-color: $validation;
+                border-radius: 0 $m $m $m;
+                width: fit-content;
+                max-width: 300px;
+                text-align: left;
+                padding: $s;
+            }
+            .timeago { 
+                font-size: $size-s;
+                text-align: left; 
+            }
+            .user { text-align: right; }
+        }
+        .user { 
+            align-self: flex-end; 
+            & p { 
+                background-color: $error; 
+                border-radius: $m 0 $m $m;
+            }
+        }
+    }
+    .form {
+        padding: $m 0;
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        column-gap: $s;
+        .input {
+            border: 1px solid;
+            border-radius: $s;
+            padding: $s;
+        }
+        .icons {
+            display: flex;
+            column-gap: $xs;
+            align-items: center;
+            .send {
+                background-color: $primaryLight;
+                color: $container;
+                border-radius: 50%;
+                padding: 7px;
+                transform: rotate(-30deg);
+                width: $xl;
+                height: auto;
+            }
+            .attachFile {
+                transform: rotate(30deg);
+                padding: 3px;
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,8 @@
+
+
+@mixin media ($prop, $val) {
+    @media screen and (#{$prop}: $val){
+        @content;
+    }
+}
+

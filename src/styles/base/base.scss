@@ -1,0 +1,35 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+::-webkit-scrollbar {
+    display: none;
+}
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: $bodyFont;
+    font-size: $size-m;
+    color: $text;
+    background-color: $body;
+}
+
+main { display: grid; width: 100vw; height: 100vh; }
+
+a { text-decoration: none; }
+
+h1,h2,h3 { color: $title; font-weight: $bold; }
+
+ul { list-style: none; }
+
+img { max-width: 100%; height: auto; object-fit: contain; }
+
+input, button { background: none; outline: none; border: none; }
+
+button { cursor: pointer; }
+
+.container { 
+    display: flex;
+    max-width: 968px; 
+    padding: 0 $m;
+    @include media(min-width, 560px) {
+        margin: 0 auto;
+    }
+}

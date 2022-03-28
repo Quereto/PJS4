@@ -1,0 +1,77 @@
+@import './abstracts.scss';
+
+:root {
+    /*========== COLORS ==========*/
+    --hue: 240;
+    --first-color: hsl(var(--hue), 53%, 49%);
+    --first-color-alt: hsl(var(--hue), 53%, 15%);
+    --first-color-light: hsl(var(--hue), 76%, 69%);
+    --title-color: hsl(var(--hue), 53%, 15%);
+    --text-color: hsl(var(--hue), 12%, 35%);
+    --text-color-light: hsl(var(--hue), 12%, 65%);
+    --input-color: hsl(var(--hue), 92%, 65%);
+    --body-color: hsl(var(--hue), 24%, 94%);
+    --container-color: #ffffff;
+    
+    /*========== FONT & TYPOGRAPHY ==========*/
+    --biggest-font-size: 3rem;
+    --title-font-size: 2rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75;
+    --tiny-font-size: .625rem;
+    @include media(min-width, 968px) {
+        --biggest-font-size: 3.5rem;
+        --title-font-size: 2.5rem;
+        --normal-font-size: 1.5rem;
+        --small-font-size: .875rem;
+        --smaller-font-size: .813;
+        --tiny-font-size: .75rem;
+    }
+}
+
+.dark-theme {
+    --title-color: hsl(var(--hue), 12%, 95%);
+    --text-color: hsl(var(--hue), 12%, 75%);
+    --text-color-light: hsl(var(--hue), 12%, 55%);
+    --body-color: hsl(var(--hue), 10%, 16%);
+}
+
+// COLORS
+$primary: var(--first-color);
+$primaryAlt: var(--first-color-alt);
+$primaryLight: var(--first-color-light);
+
+$title: var(--title-color);
+$text: var(--text-color);
+$textLight: var(--text-color-light);
+$body: var(--body-color);
+$container: var(--container-color);
+$error: #e07a5f;
+$validation: #81b29a;
+
+$bodyFont: 'Poppins', sans-serif;;
+$size-xl: var(--biggest-font-size);
+$size-l: var(--title-font-size);
+$size-m: var(--normal-font-size);
+$size-s: var(--small-font-size);
+$size-xs: var(--smaller-font-size);
+
+// FONT WEIGHT
+$medium: 500;
+$bold: 600;
+
+// MARGIENES
+$xxl: 2.5rem;
+$xl: 2rem;
+$l: 1.5rem;
+$m: 1rem;
+$s: .75rem;
+$xs: .5rem;
+$xxs: .25rem;
+
+// Z-INDEX
+$tooltip: 10;
+$fixed: 100;
+
+
