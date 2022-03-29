@@ -13,15 +13,18 @@ const Chats = ({name, msg, updatedAt, onclick}) => {
   //
   return (
     <div className={`${style.content}`} onClick={onclick}>
-      <span className={`${style.name}`}>{name}</span>
-      <div className={`${style.description}`}>
-        <p className={`${style.msg}`}>{msg}</p>
-        <TimeAgo 
-          datetime={updatedAt}
-          locale='fr'
-          live={false}
-          className={`${style.timeago}`}
-        />
+      <div className={`${style.img}`}></div>
+      <div className={`${style.info}`}>
+        <span className={`${style.name}`}>{name}</span>
+        <div className={`${style.description}`}>
+          <p className={`${style.msg}`}>{msg}</p>
+          <TimeAgo 
+            datetime={updatedAt}
+            locale='fr'
+            live={false}
+            className={`${style.timeago}`}
+          />
+        </div>
       </div>
     </div>
   );

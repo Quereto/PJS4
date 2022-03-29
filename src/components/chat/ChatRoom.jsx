@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { AttachFile, Send } from '@material-ui/icons';
+import { ArrowBack, AttachFile, Send } from '@material-ui/icons';
 import { UserContext } from '../../contexts/UserContext';
 
 import style from './ChatRoom.module.scss';
@@ -13,25 +13,23 @@ import fr from 'timeago.js/lib/lang/fr';
 // register it.
 timeago.register('fr', fr);
 
-const ChatRoom = ({contactId}) => {
+const ChatRoom = ({contact, onClose}) => {
   //
-  const { user, fetchContact } = useContext(UserContext)
+  const { user } = useContext(UserContext)
   //
   const [ data, setData ] = useState(null);
-  const [ contact, setContact ] = useState(null);
+  const [ error, setError ] = useState('');
   //
   const msgRef = useRef();
   //
   const fetchAllChats = async () => {
     await axios.put('/messages', {
       incoming_msg_id: user.id,
-      outgoing_msg_id: contactId,
+      outgoing_msg_id: contact.id,
       all: true
     })
-    .then(response => setData(response.data.data))
-    .then(async () => await fetchContact()
-                      .then(response => setContact(response.data.data.find(c => c.id === contactId))))
-    .catch(error => console.log(error.response.data.message))
+    .then(response => {setError(''); setData(response.data.data)})
+    .catch(error => setError(error.response.data.message))
   };
 
   const handleSubmit = async (e) => {
@@ -39,7 +37,7 @@ const ChatRoom = ({contactId}) => {
     msgRef.current.blur();
     const message = {
       incoming_msg_id: user.id,
-      outgoing_msg_id: contactId,
+      outgoing_msg_id: contact.id,
       msg: msgRef.current.value
     };
     await axios.post('/messages', message)
@@ -56,23 +54,32 @@ const ChatRoom = ({contactId}) => {
     return () => clearInterval(interval);
   }, []);
   //
-  console.log(data);
+  console.log(contact);
   return (
     <div className={`${style.chatroom}`}>
       <div className={`${style.header}`}>
-        <span className={`${style.title}`}>{contact && contact.name}</span>
+        <ArrowBack 
+          className={`${style.arrowBack}`}
+          onClick={onClose}
+        />
+        <div className={`${style.img}`}></div>
+        <span className={`${style.title}`}>{contact.name}</span>
       </div>
       <div className={`${style.container}`}>
-          {data && data.map((m,i,arr) => {
-            return <div key={m.id} className={`${style.msg} ${m.incoming_msg_id===user.id ? style.user : ''}`}>
-              <p>{m.msg}</p>
-              {i===0 && <TimeAgo 
-                datetime={m.updatedAt}
-                locale='fr'
-                live={false}
-                className={`${style.timeago} ${m.incoming_msg_id===user.id ? style.user : ''}`}
-              />}
-            </div>
+          {error ?  <div className={`${style.error}`}>{error}</div>
+           : data && data.map((m,i,arr) => {
+              return <div key={m.id} className={`${style.msg} ${m.incoming_msg_id===user.id ? style.user : ''}`}>
+                <div className={`${style.data}`}>
+                  { m.outgoing_msg_id===user.id && <div className={`${style.img}`}></div> }
+                  <p>{m.msg}</p>
+                </div>
+                {i===0 && <TimeAgo 
+                  datetime={m.updatedAt}
+                  locale='fr'
+                  live={false}
+                  className={`${style.timeago} ${m.incoming_msg_id===user.id ? style.user : ''}`}
+                />}
+              </div>
           })}
       </div>
       <form className={`${style.form}`} onSubmit={handleSubmit}>

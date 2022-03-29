@@ -55,6 +55,14 @@ const UserContextProvider = (props) => {
     return login;
   }
 
+  const searchContact = async (searchTerm) => {
+    // Sending the user Login request
+    const contacts = await axios.put('/user/search', {
+      searchTerm: searchTerm
+    });
+    return contacts;
+  }
+
   const fetchContact = async () => {
     // Sending the user Login request
     const contacts = await axios.get('/user/contacts');
@@ -63,6 +71,7 @@ const UserContextProvider = (props) => {
 
   // Checking user logged in or not
   const loggedInCheck = async () => {
+    //localStorage.removeItem('loginToken');
     const loginToken = localStorage.getItem('loginToken');
     // If inside the local-storage has the JWT token
     if (loginToken) {
@@ -90,7 +99,8 @@ const UserContextProvider = (props) => {
     loginUser: loginUser,
     logoutUser: logoutUser,
     uploadFile: uploadFile,
-    fetchContact: fetchContact
+    fetchContact: fetchContact,
+    searchContact: searchContact,
   }
 
   return (

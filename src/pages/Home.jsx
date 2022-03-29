@@ -4,29 +4,36 @@ import ChatRoom from '../components/chat/ChatRoom';
 import axios from 'axios';
 import { red } from '@material-ui/core/colors';
 import ChatContact from '../components/chat/ChatContact';
+import ChatGroup from '../components/chat/ChatGroup';
 
 const Home = () => {
   const [ showChats, setShowChats ] = useState(true);
   const [ showChatRoom, setShowChatRoom ] = useState(false);
   const [ showChatContact, setShowChatContact ] = useState(false);
-  const [ contactId, setContactId ] = useState(null);
+  const [ contact, setcontact ] = useState(null);
   
   const openChatRoom = (data) => {
     setShowChats(false);
-    setContactId(data)
+    setShowChatContact(false);
+    setcontact(data)
     setShowChatRoom(true);
+  };
+
+  const closeChatRoom = () => {
+    setShowChatRoom(false);
+    setShowChats(true);
   };
 
   const openChatContact = () => {
     setShowChatContact(true);
-    setShowChats(false);
   };
 
   return (
     <div style={{width:'100%'}}>
-      { showChats && <Chats openChatRoom={openChatRoom} openChatContact={openChatContact} /> }
-      { showChatRoom && <ChatRoom contactId={contactId} /> }
-      { showChatContact && <ChatContact /> }
+      {/* { showChats && <Chats openChatRoom={openChatRoom} openChatContact={openChatContact} /> } */}
+      <ChatGroup />
+      { showChatRoom && <ChatRoom onClose={() => closeChatRoom()} contact={contact} /> }
+      { <ChatContact openChatRoom={openChatRoom} open={showChatContact} onClose={() => setShowChatContact(false)} /> }
     </div>
   );
 };

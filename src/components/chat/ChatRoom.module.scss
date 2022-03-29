@@ -11,28 +11,74 @@
         margin: 0 auto;
     }
     .header {
-        //border: 1px solid;
+        // border: 1px solid;
+        position: relative;
         padding: $m;
         text-align: center;
+        display: flex;
+        align-items: center;
+        column-gap: $xs;
+        // box-shadow: 0 0 4px rgba($color: #000000, $alpha: .4);
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -$m;
+            right: -$m;
+            height: 100%;
+            background-color: $container;
+            z-index: -1;
+            box-shadow: 0 0 4px rgba($color: #000000, $alpha: .4);
+        }
+        .arrowBack { 
+            cursor: pointer; 
+            font-weight: $bold;
+            :hover { color: $primary; } 
+        }
+        .img { 
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $primaryLight;
+        }
         .title { font-size: $size-l; font-weight: $medium; text-transform: capitalize; }
     }
     .container {
+        padding-top: $s;
         display: flex;
         flex-direction: column-reverse;
         flex-wrap: nowrap;
         justify-content: end;
         row-gap: $s;
         overflow-x: auto;
+        .error { 
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .msg {
             display: grid;
-            align-self: flex-start;
-            & p {
-                background-color: $validation;
-                border-radius: 0 $m $m $m;
-                width: fit-content;
-                max-width: 300px;
-                text-align: left;
-                padding: $s;
+            justify-items: flex-start;
+            .data {
+                display: flex;
+                align-items: center;
+                column-gap: $xxs;
+                .img { 
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    background-color: $primaryLight;
+                }
+                & p {
+                    background-color: $container;
+                    border-radius: $m $m $m 0;
+                    font-size: $size-s;
+                    width: fit-content;
+                    max-width: 300px;
+                    text-align: left;
+                    padding: $xs $s $xs $l;
+                }
             }
             .timeago { 
                 font-size: $size-s;
@@ -42,9 +88,14 @@
         }
         .user { 
             align-self: flex-end; 
-            & p { 
-                background-color: $error; 
-                border-radius: $m 0 $m $m;
+            justify-items: flex-end;
+            .data {
+                & p { 
+                    background-color: $primaryLight; 
+                    color: $container;
+                    padding: $xs $l $xs $s;
+                    border-radius: $m $m 0 $m;
+                }
             }
         }
     }

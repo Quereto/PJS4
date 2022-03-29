@@ -1,0 +1,76 @@
+@import '../../styles/config/variables.scss';
+
+
+.chatgroup {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 200px 1fr 1fr;
+    .profile {
+        display: grid;
+        grid-template-rows: max-content 1fr;
+        
+        border-bottom: 1px dotted $textLight;
+        .dot {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            font-size: $xl;
+        }
+        .data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: $container;
+            }
+            .title { color: $title; font-size: $m+$xxs; font-weight: $bold; }
+            .subtitle { color: $textLight; }
+        }
+    }
+    .section {
+        padding-top: $m;
+        .wrapper {
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            row-gap: $m;
+            overflow-x: auto;
+            
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: $m;
+                .title { color: $title; font-size: $m+$xxs; font-weight: $bold; }
+                .btn { color: $primary; text-decoration: underline; }
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                row-gap: $m;
+                overflow-x: auto;
+                .content {
+                    display: flex;
+                    align-items: center;
+                    column-gap: $s;
+                    .img {
+                        width: 55px;
+                        height: 55px;
+                        border-radius: 50%;
+                        background-color: $container;
+                    }
+                    .name { font-weight: $medium; }
+                    .description { color: $textLight; }
+                }
+            }
+        }
+    }
+}
+
+

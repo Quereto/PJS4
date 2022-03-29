@@ -28,7 +28,7 @@ button { cursor: pointer; }
 .container { 
     display: flex;
     max-width: 968px; 
-    padding: 0 $m;
+    padding: $m;
     @include media(min-width, 560px) {
         margin: 0 auto;
     }

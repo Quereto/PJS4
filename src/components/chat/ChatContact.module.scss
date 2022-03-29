@@ -1,0 +1,103 @@
+@import '../../styles/config/variables.scss';
+
+
+
+.contact {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    $color: #fbfbfe;
+    display: flex;
+    visibility: hidden;
+    justify-content: center;
+    align-items: center;
+
+    //background-color: rgba($color: #000000, $alpha: .5);
+    
+    .blur {
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(130deg,
+                rgba($color: $color, $alpha: .6),
+                rgba($color: $color, $alpha: .2));
+        box-shadow: inset 2px 2px 1px rgba($color: $color, $alpha: .3),
+                    inset -2px -2px 1px rgba($color: $color, $alpha: .6);
+        backdrop-filter: blur(5px);
+    }
+    .container {
+        z-index: $tooltip;
+        cursor: pointer;
+        background-color: $body;
+        padding: $s;
+        border-radius: $s;
+        @include media (max-width, 520px){ 
+            transform: scale(.8);
+        }
+        .title { margin-bottom: $s; }
+        .searchbar {
+            //border: 1px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            column-gap: $s;
+            background-color: $container;
+            border-radius: $s;
+            padding: $xs $s; 
+            margin-bottom: $s; 
+            .input { width: 100%; font-size: $size-m; }
+            .search {
+                cursor: pointer;
+                &:hover { color: $primary; }
+            }
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            row-gap: $m;
+            overflow-x: auto;
+            @include media (min-width, 520px){ width: 400px; height: 250px; }
+            @include media (max-width, 520px){ width: 100vw; height: 100vh; row-gap: $s; }
+            .error { text-align: center; }
+            .content {
+                cursor: pointer;
+                display: flex;
+                column-gap: $s;
+                padding: $s;
+                border-radius: $s;
+                &:hover { background-color: $primary; color: $container; }
+                .img { 
+                    width: 50px; 
+                    height: 50px; 
+                    border-radius: 50%;
+                    background-color: $container;
+                }
+                .data {
+                    .name { font-weight: $bold; }
+                    .status {
+                        display: flex;
+                        align-items: center;
+                        column-gap: $xxs;
+                        .pin { 
+                            width: 10px; 
+                            height: 10px; 
+                            border-radius: 50%;
+                        }
+                        .online { background-color: $validation; }
+                        .offline { background-color: $error; }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.show { visibility: visible; }
+
+
+
