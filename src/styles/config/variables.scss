@@ -20,14 +20,14 @@
     --small-font-size: .813rem;
     --smaller-font-size: .75;
     --tiny-font-size: .625rem;
-    @include media(min-width, 968px) {
-        --biggest-font-size: 3.5rem;
-        --title-font-size: 2.5rem;
-        --normal-font-size: 1.5rem;
-        --small-font-size: .875rem;
-        --smaller-font-size: .813;
-        --tiny-font-size: .75rem;
-    }
+    // @include media(min-width, 968px) {
+    //     --biggest-font-size: 3.5rem;
+    //     --title-font-size: 2.5rem;
+    //     --normal-font-size: 1.5rem;
+    //     --small-font-size: .875rem;
+    //     --smaller-font-size: .813;
+    //     --tiny-font-size: .75rem;
+    // }
 }
 
 .dark-theme {

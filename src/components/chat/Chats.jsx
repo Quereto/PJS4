@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Add } from "@material-ui/icons";
+import { Add, Close, Crop, OutdoorGrill } from "@material-ui/icons";
 import { UserContext } from '../../contexts/UserContext';
 import Chat from './Chat';
 
@@ -9,7 +9,7 @@ import style from './Chats.module.scss';
 
 const Chats = ({openChatRoom, openChatContact}) => {
   //
-  const { user, fetchContact } = useContext(UserContext);
+  const { user, fetchContact, logoutUser } = useContext(UserContext);
   //
   const [ msg, setMsg ] = useState([]);
   const [ msgList, setMsgList ] = useState([]);
@@ -38,10 +38,10 @@ const Chats = ({openChatRoom, openChatContact}) => {
           .catch((error) => {
             tab.push(null);
             if (tab.length-1 === arr.length-1) 
-            { setMsgList(tab); tab.length=0; }
+            { setMsgList([...tab]); tab.length=0; }
           })
           if (tab.length-1 === arr.length-1) 
-          { setMsgList(tab); tab.length=0; }
+          { setMsgList([...tab]); tab.length=0; }
         });
       } catch(err) {
         console.log(err)
@@ -66,9 +66,15 @@ const Chats = ({openChatRoom, openChatContact}) => {
     <div className={`${style.chat}`}>
         <div className={`${style.header}`}>
           <h2 className={`${style.title}`}>My Chats</h2>
-          <button className={`${style.btn}`} onClick={openChatContact}>
-            <Add className={`${style.add}`} />
-          </button>
+          <div className={`${style.btns}`}>
+            <button className={`${style.btn}`} onClick={openChatContact}>
+              <Add className={`${style.add}`} />
+            </button>
+            <button className={`${style.logout}`} onClick={logoutUser}>
+              <Close className={`${style.close}`} />
+              <span>Déconnexion</span>
+            </button>
+          </div>
         </div>
       {error && console.log(error)}
       <div className={`${style.container}`}>
@@ -76,11 +82,11 @@ const Chats = ({openChatRoom, openChatContact}) => {
           .filter(m => m !== null)
           .sort((m1,m2) => m1.id-m2.id)
           .map((m, key) => {
-            console.log(msgList);
             if(m){
               return <Chat
               key={key}
               name={m.contact.name}
+              img={m.contact.img}
               msg={m.incoming_msg_id===user.id ? 'Vous : '+m.msg : m.msg}
               updatedAt={m.updatedAt}
               onclick={() => openChatRoom(m.contact)}

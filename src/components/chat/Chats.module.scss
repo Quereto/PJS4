@@ -3,7 +3,7 @@
 .chat {
     max-width: 575px;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: grid;
     grid-template-rows: max-content 1fr;
     @include media(min-width, 575px) {
@@ -15,17 +15,27 @@
         align-items: center;
         margin: $s 0;
         .title { font-size: $size-l; }
-        .btn {
+        .btns {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: $m;
-            padding: $xxs $xs;
-            background-color: $primaryLight;
-            &:hover { background-color: $primary; }
-            .add { 
-                font-size: $l; 
-                color: $container; 
+            column-gap: $m;
+            .btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: $m;
+                padding: $xxs $xs;
+                background-color: $primaryLight;
+                &:hover { background-color: $primary; }
+                .add { 
+                    font-size: $l; 
+                    color: $container; 
+                }
+            }
+            .logout {
+                @extend .btn;
+                color: $container;
+                background-color: $error;
+                &:hover { background-color: $error;}
             }
         }
     }
@@ -39,7 +49,8 @@
             cursor: pointer;
             padding: $m;
             border-radius: $m;
-            display: flex;
+            display: grid;
+            grid-template-columns: max-content 1fr;
             align-items: center;
             column-gap: $s;
             &:hover { 
@@ -53,15 +64,15 @@
                 background-color: $container;
             }
             .info {
-                width: 90%;
-                .name { font-size: $m+$xxs; }
+                .name { font-size: $m; }
                 .description {
-                    display: flex;
+                    display: grid;
+                    grid-template-columns: 1fr max-content;
                     justify-content: space-between;
                     align-items: center;
+                    column-gap: $s;
                     .msg { 
                         font-size: $s; 
-                        width: 60%; 
                         white-space: nowrap; 
                         overflow: hidden;
                         text-overflow: ellipsis;

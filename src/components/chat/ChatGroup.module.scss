@@ -1,15 +1,21 @@
 @import '../../styles/config/variables.scss';
 
+.swiper {
+    max-width: 280px;
+    height: 100%;
+    @include media (max-width, 960px) {
+        max-width: 225px;
+    }
+}
 
 .chatgroup {
-    height: 100%;
     display: grid;
-    grid-template-rows: 200px 1fr 1fr;
+    grid-template-rows: 200px 1fr;
+    height: 100%;
     .profile {
         display: grid;
         grid-template-rows: max-content 1fr;
-        
-        border-bottom: 1px dotted $textLight;
+        border-bottom: 1px dashed $textLight;
         .dot {
             display: flex;
             justify-content: flex-end;
@@ -17,6 +23,7 @@
             font-size: $xl;
         }
         .data {
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -31,21 +38,22 @@
             .subtitle { color: $textLight; }
         }
     }
-    .section {
-        padding-top: $m;
-        .wrapper {
-            background-color: pink;
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        .section {
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
-            row-gap: $m;
             overflow-x: auto;
-            
+            padding-top: $s;
             .header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding-bottom: $m;
+                padding: 0 $xs;
                 .title { color: $title; font-size: $m+$xxs; font-weight: $bold; }
                 .btn { color: $primary; text-decoration: underline; }
             }
@@ -53,20 +61,27 @@
                 display: flex;
                 flex-direction: column;
                 flex-wrap: nowrap;
-                row-gap: $m;
                 overflow-x: auto;
                 .content {
-                    display: flex;
+                    cursor: pointer;
+                    border-radius: $m;
+                    padding: $s;
+                    display: grid;
+                    grid-template-columns: max-content 1fr;
                     align-items: center;
                     column-gap: $s;
+                    &:hover {
+                        background-color: $primary;
+                        color: $container;
+                    }
                     .img {
-                        width: 55px;
-                        height: 55px;
+                        width: 50px;
+                        height: 50px;
                         border-radius: 50%;
                         background-color: $container;
                     }
                     .name { font-weight: $medium; }
-                    .description { color: $textLight; }
+                    .description { color: $textLight; font-size: $s; }
                 }
             }
         }

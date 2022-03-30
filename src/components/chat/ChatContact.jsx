@@ -71,7 +71,7 @@ const ChatContact = ({openChatRoom, open, onClose}) => {
           { error ? <div className={`${style.error}`}>{error}</div>
             : contacts.length>0 && contacts.map(contact => {
               return <div key={contact.id} className={`${style.content}`} onClick={() => openChatRoom(contact)}>
-                <div className={`${style.img}`}></div>
+                <img src={contact.img} alt="profile" className={`${style.img}`} />
                 <div className={`${style.data}`}>
                   <span className={`${style.name}`}>{contact.name}</span>
                   <div className={`${style.status}`}>

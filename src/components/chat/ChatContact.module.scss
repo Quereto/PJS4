@@ -6,15 +6,15 @@
     position: absolute;
     top: 0; 
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     $color: #fbfbfe;
     display: flex;
     visibility: hidden;
     justify-content: center;
     align-items: center;
-
-    //background-color: rgba($color: #000000, $alpha: .5);
+    z-index: $fixed;
+    // background-color: rgba($color: #d46a6a, $alpha: .5);
     
     .blur {
         position: absolute;
@@ -31,7 +31,7 @@
     }
     .container {
         z-index: $tooltip;
-        cursor: pointer;
+        // cursor: pointer;
         background-color: $body;
         padding: $s;
         border-radius: $s;

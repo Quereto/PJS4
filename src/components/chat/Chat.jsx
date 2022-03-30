@@ -8,12 +8,12 @@ import fr from 'timeago.js/lib/lang/fr';
 // register it.
 timeago.register('fr', fr);
 
-const Chats = ({name, msg, updatedAt, onclick}) => {
+const Chats = ({img, name, msg, updatedAt, onclick}) => {
   //
   //
   return (
     <div className={`${style.content}`} onClick={onclick}>
-      <div className={`${style.img}`}></div>
+      <img src={img} alt="profile" className={`${style.img}`} />
       <div className={`${style.info}`}>
         <span className={`${style.name}`}>{name}</span>
         <div className={`${style.description}`}>

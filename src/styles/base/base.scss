@@ -11,7 +11,13 @@ body {
     background-color: $body;
 }
 
-main { display: grid; width: 100vw; height: 100vh; }
+main { 
+    width: 100vw; 
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 a { text-decoration: none; }
 
@@ -19,7 +25,7 @@ h1,h2,h3 { color: $title; font-weight: $bold; }
 
 ul { list-style: none; }
 
-img { max-width: 100%; height: auto; object-fit: contain; }
+img { max-width: 100%; height: auto; object-fit: cover; }
 
 input, button { background: none; outline: none; border: none; }
 
@@ -27,9 +33,9 @@ button { cursor: pointer; }
 
 .container { 
     display: flex;
-    max-width: 968px; 
+    max-width: 1168px; 
     padding: $m;
-    @include media(min-width, 560px) {
+    @include media(min-width, 968px) {
         margin: 0 auto;
     }
 }

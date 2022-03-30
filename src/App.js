@@ -4,6 +4,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Home from './pages/Home';
+import MainLayout from './pages/MainLayout';
+
 
 const App = () => {
   //
@@ -11,7 +13,7 @@ const App = () => {
   //
 
   return (
-    <main className="container">
+    <main>
       <BrowserRouter>
         <Routes>
           { /* Show pages according to the url */

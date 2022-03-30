@@ -13,7 +13,7 @@ import fr from 'timeago.js/lib/lang/fr';
 // register it.
 timeago.register('fr', fr);
 
-const ChatRoom = ({contact, onClose}) => {
+const ChatRoom = ({contact, onClose, newBroadcast}) => {
   //
   const { user } = useContext(UserContext)
   //
@@ -41,20 +41,32 @@ const ChatRoom = ({contact, onClose}) => {
       msg: msgRef.current.value
     };
     await axios.post('/messages', message)
-               .then(response => {msgRef.current.value=''})
+               .then(() => { 
+                 console.log('Good! send');
+                  if (contact.isGroup) {
+                    console.log('contact is group')
+                    newBroadcast({
+                      group: contact, 
+                      msg: msgRef.current.value
+                    })
+                  }
+                  msgRef.current.value=''; 
+                })
                .catch(error => console.log(error.response.data.message))
   };
 
   useEffect(() => {
     const asyncCall = async () => { await fetchAllChats(); }
     //asyncCall();
-    const interval = setInterval(() => {
-      asyncCall()
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+    if (contact) {
+      const interval = setInterval(() => {
+        asyncCall()
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [contact]);
   //
-  console.log(contact);
+  // console.log(contact);
   return (
     <div className={`${style.chatroom}`}>
       <div className={`${style.header}`}>
@@ -62,15 +74,15 @@ const ChatRoom = ({contact, onClose}) => {
           className={`${style.arrowBack}`}
           onClick={onClose}
         />
-        <div className={`${style.img}`}></div>
-        <span className={`${style.title}`}>{contact.name}</span>
+        <img src={contact && contact.img} alt="profile" className={`${style.img}`} />
+        <span className={`${style.title}`}>{contact ? contact.name : ''}</span>
       </div>
       <div className={`${style.container}`}>
           {error ?  <div className={`${style.error}`}>{error}</div>
            : data && data.map((m,i,arr) => {
               return <div key={m.id} className={`${style.msg} ${m.incoming_msg_id===user.id ? style.user : ''}`}>
                 <div className={`${style.data}`}>
-                  { m.outgoing_msg_id===user.id && <div className={`${style.img}`}></div> }
+                  { m.outgoing_msg_id===user.id && <img src={contact.img} alt="profile" className={`${style.img}`} /> }
                   <p>{m.msg}</p>
                 </div>
                 {i===0 && <TimeAgo 
